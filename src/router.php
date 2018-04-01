@@ -1,16 +1,22 @@
 <?php
 
-// handle static content
+session_start();
+
 $clean_request_uri = strtok($_SERVER['REQUEST_URI'], '?');
-if (preg_match('/\.css|\.js|\.jpg|\.woff|\.ttf|\.png|\.map$/', $clean_request_uri, $match)) {
+if (preg_match('/\.well-known|\.css|\.js|\.jpg|\.jpeg|\.woff|\.ttf|\.png|\.map|\.pdf|\.html|\.mp4$/', $clean_request_uri, $match)) {
     $mimeTypes = [
+        '.html' => 'text/html',
         '.css' => 'text/css',
+        '.mp4' => 'video/mp4',
         '.js'  => 'application/javascript',
         '.jpg' => 'image/jpg',
+        '.jpeg' => 'image/jpg',
         '.png' => 'image/png',
         '.map' => 'application/json',
+        '.json' => 'application/json',
 		'.woff' => 'font/opentype',
 		'.ttf' => 'font/opentype',
+		'.pdf' => 'application/pdf',
     ];
     $path = __DIR__ . $clean_request_uri;
     if (is_file($path)) {
