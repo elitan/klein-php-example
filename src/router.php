@@ -27,6 +27,14 @@ if (preg_match('/\.well-known|\.css|\.js|\.jpg|\.jpeg|\.woff|\.ttf|\.png|\.map|\
     }
 }
 
+function convertUrl($url) {
+    $array = explode('/', $url);
+    $array = array_filter($array); // remove empty elements from array
+    $array = array_map('urlencode', $array);
+    return '/' . implode("/", $array);
+}
+
+
 // router
 require_once(__DIR__ . '/vendor/autoload.php');
 
